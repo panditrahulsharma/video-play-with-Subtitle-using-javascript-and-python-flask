@@ -12,8 +12,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <title>Hello, world!</title>
+
+<style type="text/css">
+    
+table.scroll {
+    width: 100%; /* Optional */
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+    border: 2px solid black;
+}
+
+table.scroll tbody,
+table.scroll thead { display: block; }
+
+thead tr th { 
+    height: 30px;
+    line-height: 30px;
+    /*text-align: left;*/
+}
+
+table.scroll tbody {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody { border-top: 2px solid black; }
+
+tbody td, thead th {
+    width: 20%; /* Optional */
+    border-right: 1px solid black;
+}
+
+tbody td:last-child, thead th:last-child {
+    border-right: none;
+}    
+
+</style>
+
+
   </head>
   <body>
 
@@ -22,10 +60,10 @@
 
 
 
-          <div class="col-sm-5" height="30px">
+          <div class="col-sm-5" >
             <div class="card">
 
-             <table class="table table-striped table-dark">
+            <table class="table table-striped " class="scroll">
                   <thead>
                     <tr>
                       <th scope="col">Start Time</th>
@@ -35,9 +73,10 @@
                   </thead>
                   <tbody id="text_tbody">
 
-
                   </tbody>
-                </table>
+            </table>
+
+
             </div>
           </div>
 
@@ -56,9 +95,6 @@
 
 
         </div>
-
-
-
 
 
 <script>
@@ -144,8 +180,8 @@
                     console.log(cue)
 
                   MyTextData+='<tr>';
-                  MyTextData+='<td>'+cue['startTime']+'</td>';
-                  MyTextData+='<td>'+cue['endTime']+'</td>';
+                  MyTextData+='<td>'+splitted[0]+'</td>';
+                  MyTextData+='<td>'+splitted[1]+'</td>';
                   MyTextData+='<td>'+cue['text']+'</td>';
                   MyTextData+='</tr>';
 
@@ -163,10 +199,8 @@
             }
         }
 
-    // console.log(typeof cues[0])
 
-    // console.log(cues[0]['endTime'],cues[0]['startTime'],cues[0]['text'])
-    // console.log(cues[0])
+
 
         $('#text_tbody').append(MyTextData);
 
@@ -183,7 +217,7 @@
         var subtitle = syncData;
         var track = video.addTextTrack('subtitles', 'English', 'en');
 
-        // console.log(cue)
+        console.log(video)
 
         track.mode = "showing";
         quick_and_dirty_vtt_or_srt_parser(subtitle).map(function(cue) {
@@ -193,8 +227,7 @@
     init();
 </script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
 
   </body>
 </html>
